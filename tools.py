@@ -1,13 +1,18 @@
+# Importing the required Dependencies
 import os
 import requests
 from dotenv import load_dotenv
 from ddgs import DDGS
 
+# This is for getting the API keys that are stored in the .env file
 load_dotenv()
 
 TOKEN = os.getenv("TOKEN")
 
 
+# This is the tool that will search for the Product 
+# Product Hunt uses graphql 
+# while the post request it needs to be converted into json
 def Search_For_the_product(query: str):
     """
     NOTE: Product Hunt's API does not support free-text search on posts.
@@ -52,6 +57,7 @@ def Search_For_the_product(query: str):
         raise RuntimeError(f"Product Hunt GraphQL error:\n{data['errors']}")
 
     edges = data["data"]["posts"]["edges"]
+    print(edges)
 
     return [
         {
@@ -62,6 +68,7 @@ def Search_For_the_product(query: str):
         for edge in edges
     ]
     
+# this is for searching the idea accross the web 
 def search_web_for_idea(query: str):
     try:
         with DDGS() as ddgs:
