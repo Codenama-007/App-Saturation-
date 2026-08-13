@@ -69,7 +69,7 @@ def search_products(state: AppState):
 
     return {"web_results": web_results, "products": products}
 
-# this is used for matching the top results 
+# both the product hunt and duckduckgo search results are compared and then the most relevant results are returned 
 def compare_products(state: AppState):
     prompt = f"""
 You are a startup competition analyst.

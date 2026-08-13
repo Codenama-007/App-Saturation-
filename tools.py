@@ -57,7 +57,7 @@ def Search_For_the_product(query: str):
         raise RuntimeError(f"Product Hunt GraphQL error:\n{data['errors']}")
 
     edges = data["data"]["posts"]["edges"]
-    print(edges)
+    # print(edges)
 
     return [
         {
