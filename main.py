@@ -15,13 +15,14 @@ while True:
         
     console.print("\n[bold yellow]Researching Product Hunt...[/bold yellow]\n")
     result = graph.invoke(
-    {
-        "idea": idea,
-        "search_query": "",
-        "products": [],
-        "result": "",
-    }
-)
+        {
+            "idea": idea,
+            "search_query": "",
+            "products": [],
+            "web_results": [],
+            "result": "",
+        }
+    )
 
     console.print(
         Panel(
