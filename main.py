@@ -21,13 +21,22 @@ while True:
             "products": [],
             "web_results": [],
             "result": "",
+            "features": "",
         }
     )
 
     console.print(
         Panel(
             result["result"],
-            title="App Saturation - Stage 1",
+            title="App Saturation - Existing Products",
             border_style="green",
+        )
+    )
+
+    console.print(
+        Panel(
+            result["features"],
+            title="Suggested Differentiators",
+            border_style="cyan",
         )
     )

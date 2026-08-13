@@ -6,3 +6,4 @@ class AppState(TypedDict):
     products: List[Dict]      # from Product Hunt
     web_results: List[Dict]   # from DuckDuckGo
     result : str
+    features: str             # NEW: gap analysis + suggestions
