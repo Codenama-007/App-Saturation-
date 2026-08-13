@@ -1,0 +1,7 @@
+langchain 
+langgraph
+langchain_ollama
+tavily-python
+langchain-community
+typer 
+rich
