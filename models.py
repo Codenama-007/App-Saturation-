@@ -7,3 +7,4 @@ class AppState(TypedDict):
     web_results: List[Dict]   # from DuckDuckGo
     result : str
     features: str             # NEW: gap analysis + suggestions
+    from_cache: bool   # NEW
