@@ -400,3 +400,8 @@ while True:
 print("\n👋 Thank you for using SecureScan AI.")
 
 print(" Thank you for using my llm ")
+# Below part is used to generate the image of the Agents Workflow 
+png_data = graph.get_graph().draw_mermaid_png()
+
+with open("langgraph_workflow_security.png", "wb") as f:
+    f.write(png_data)
