@@ -5,3 +5,4 @@ tavily-python
 langchain-community
 typer 
 rich
+ddgs

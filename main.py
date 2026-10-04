@@ -20,16 +20,17 @@ while True:
     console.print("\n[bold yellow]Researching...[/bold yellow]\n")
 
     result = graph.invoke(
-        {
-            "idea": idea,
-            "search_query": "",
-            "products": [],
-            "web_results": [],
-            "result": "",
-            "features": "",
-            "from_cache": False,
-        }
-    )
+    {
+        "idea": idea,
+        "search_query": "",
+        "products": [],
+        "web_results": [],
+        "result": "",
+        "features": "",
+        "scoring": {},
+        "from_cache": False,
+    }
+)
 
     title_suffix = " (from memory)" if result.get("from_cache") else ""
 
@@ -41,10 +42,38 @@ while True:
         )
     )
 
+    scoring = result.get("scoring", {})
+
+    score_text = f"""
+    [bold]SATURATION SCORE[/bold]
+    {scoring.get("saturation_score", 0)}/100
+
+    [bold]SATURATION LEVEL[/bold]
+    {scoring.get("saturation_level", "Unknown")}
+
+    [bold]COMPETITION DENSITY[/bold]
+    {scoring.get("competition_density", 0)}/100
+
+    [bold]SIMILARITY SCORE[/bold]
+    {scoring.get("similarity_score", 0)}/100
+
+    [bold]MARKET GAP SCORE[/bold]
+    {scoring.get("market_gap_score", 0)}/100
+
+    [bold]CONFIDENCE[/bold]
+    {scoring.get("confidence_score", 0)}/100
+
+    [bold]DIRECT COMPETITORS[/bold]
+    {scoring.get("relevant_competitors", 0)}
+
+    [bold]HIGH-SIMILARITY COMPETITORS[/bold]
+    {scoring.get("high_similarity_competitors", 0)}
+    """
+
     console.print(
         Panel(
-            result["features"],
-            title=f"Suggested Differentiators{title_suffix}",
-            border_style="cyan",
+            score_text,
+            title="Market Saturation Score",
+            border_style="magenta",
         )
     )

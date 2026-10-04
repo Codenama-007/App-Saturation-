@@ -8,3 +8,6 @@ class AppState(TypedDict):
     result : str              # total results from product hunt and DuckDuckGo
     features: str             # NEW: gap analysis + suggestions
     from_cache: bool   # NEW
+    # These are Scoring Information 
+    scoring: Dict
+    from_cache: bool
