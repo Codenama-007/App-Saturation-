@@ -158,3 +158,50 @@ def calculate_saturation_score(
         "relevant_competitors": direct_competitors,
         "high_similarity_competitors": high_similarity,
     }
+
+# Calculating the oppurtunity score 
+def calculate_opportunity_score(scoring: dict) -> dict:
+    """
+    Calculate an explainable Build / Don't Build recommendation.
+
+    This is separate from saturation because a crowded market
+    can still be worth entering when meaningful gaps exist.
+    """
+
+    market_gap = float(scoring.get("market_gap_score", 0))
+    competition = float(scoring.get("competition_density", 0))
+    similarity = float(scoring.get("similarity_score", 0))
+    confidence = float(scoring.get("confidence_score", 0))
+
+    opportunity_score = (
+        market_gap * 0.45
+        + (100 - competition) * 0.20
+        + (100 - similarity) * 0.15
+        + confidence * 0.20
+    )
+
+    opportunity_score = round(
+        clamp(opportunity_score), 1
+    )
+
+    if opportunity_score >= 71:
+        verdict = "BUILD"
+        opportunity_level = "Strong Opportunity"
+
+    elif opportunity_score >= 51:
+        verdict = "BUILD WITH DIFFERENTIATION"
+        opportunity_level = "Promising, but differentiation matters"
+
+    elif opportunity_score >= 31:
+        verdict = "BUILD ONLY IF DIFFERENTIATED"
+        opportunity_level = "Difficult market"
+
+    else:
+        verdict = "DON'T BUILD"
+        opportunity_level = "Weak Opportunity"
+
+    scoring["opportunity_score"] = opportunity_score
+    scoring["opportunity_level"] = opportunity_level
+    scoring["build_verdict"] = verdict
+
+    return scoring
