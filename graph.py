@@ -251,25 +251,49 @@ workflow.add_node("calculate_scores", calculate_scores)
 workflow.add_node("suggest_features", suggest_features)
 workflow.add_node("save_to_cache", save_to_cache)
 
+
 workflow.add_edge(START, "check_cache")
 
 workflow.add_conditional_edges(
     "check_cache",
     route_after_cache,
     {
-        "cached": END,               # already have result + features, skip everything
-        "fresh": "generate_query",   # no match, run the full pipeline
+        "cached": END,
+        "fresh": "generate_query",
     },
 )
 
+# Search workflow
+workflow.add_edge(
+    "generate_query",
+    "search_products",
+)
+
+workflow.add_edge(
+    "search_products",
+    "compare_products",
+)
+
+# Scoring workflow
 workflow.add_edge(
     "compare_products",
-    "calculate_scores"
+    "calculate_scores",
 )
 
 workflow.add_edge(
     "calculate_scores",
-    "suggest_features"
+    "suggest_features",
+)
+
+# Save results after analysis
+workflow.add_edge(
+    "suggest_features",
+    "save_to_cache",
+)
+
+workflow.add_edge(
+    "save_to_cache",
+    END,
 )
 graph = workflow.compile()
 

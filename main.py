@@ -69,7 +69,14 @@ while True:
     [bold]HIGH-SIMILARITY COMPETITORS[/bold]
     {scoring.get("high_similarity_competitors", 0)}
     """
-
+    
+    console.print(
+        Panel(
+            result.get("features", "No differentiating features generated."),
+            title="Suggested Differentiating Features",
+            border_style="cyan",
+        )
+    )
     console.print(
         Panel(
             score_text,
