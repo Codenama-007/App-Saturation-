@@ -7,3 +7,5 @@ typer
 rich
 ddgs
 langchain-google-genai
+pytest
+deepeval
