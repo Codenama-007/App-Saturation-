@@ -6,3 +6,4 @@ langchain-community
 typer 
 rich
 ddgs
+langchain-google-genai
