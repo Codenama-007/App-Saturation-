@@ -15,7 +15,7 @@ from deepeval.models import OllamaModel
 from deepeval.test_case import LLMTestCase, LLMTestCaseParams
 
 from config import JUDGE_MODEL, OLLAMA_URL
-from golden_set import GOLDEN, NONSENSE, SATURATED
+from goldenset import GOLDEN, NONSENSE, SATURATED
 from scoring import INCONCLUSIVE
 
 pytestmark = pytest.mark.llm
