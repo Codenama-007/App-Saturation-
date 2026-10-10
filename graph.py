@@ -2,18 +2,9 @@
 from langgraph.graph import END, START, StateGraph
  
 from models import AppState
-from nodes import (
-    calculate_scores,
-    check_cache,
-    compare_products,
-    generate_query,
-    route_after_cache,
-    route_after_search,
-    save_to_cache,
-    search_products,
-    suggest_features,
-)
- 
+from analysis import calculate_scores, suggest_features
+from cache import check_cache, route_after_cache, save_to_cache
+from research import compare_products, generate_query, route_after_search, search_products
 workflow = StateGraph(AppState)
  
 workflow.add_node("check_cache", check_cache)
